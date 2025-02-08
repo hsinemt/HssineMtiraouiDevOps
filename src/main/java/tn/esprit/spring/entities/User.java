@@ -24,7 +24,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	//conflit 
+	//conflit223
 	
 	private String firstName; 
 	
