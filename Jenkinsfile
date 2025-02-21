@@ -29,7 +29,7 @@ pipeline {
  stage('MVN SONARQUBE') {
             steps {
                 script {
-                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Fcbcampnou1899. -Dmaven.skipTests=true'
+                    sh 'mvn sonar:sonar -Dsonar.login=squ_4d0ae395d64be775fc49cef3b0d43bc25f3a786a -Dsonar.password=Fcbcampnou1899. -Dmaven.skipTests=true'
                 }
             }
         }
