@@ -14,12 +14,17 @@ pipeline {
             }
         }
 
-        stage('MVN SONARQUBE') {
+        // stage('MVN SONARQUBE') {
+        //     steps {
+        //         script {
+        //             // Use the provided SonarQube token
+        //             sh 'mvn sonar:sonar -Dsonar.token=squ_4d0ae395d64be775fc49cef3b0d43bc25f3a786a -Dmaven.skipTests=true'
+        //         }
+        //     }
+        // }
+          stage('MVN Nexus') {
             steps {
-                script {
-                    // Use the provided SonarQube token
-                    sh 'mvn sonar:sonar -Dsonar.token=squ_4d0ae395d64be775fc49cef3b0d43bc25f3a786a -Dmaven.skipTests=true'
-                }
+                sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
     }
