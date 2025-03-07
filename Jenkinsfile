@@ -23,6 +23,12 @@ pipeline {
                 sh 'docker build -t hsinemt/timesheet-devops:1.0.0'
              }
          }
+        stage('Debug') {
+    steps {
+        sh 'ls -la target/'
+        sh 'pwd'
+    }
+}
         stage('deploy Image ') {
              steps {
                 sh 'docker push hsinemt/timesheet-devops:1.0.0'
