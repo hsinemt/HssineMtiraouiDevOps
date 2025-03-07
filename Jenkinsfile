@@ -33,10 +33,10 @@ pipeline {
         //         }
         //     }
         // }
-stage('Compile Stage') {
-    steps {
-        sh 'mvn clean package -Dmaven.test.skip=true'
-    }
-}
+stage('MVN Nexus') {
+            steps {
+                sh 'mvn install -Dmaven.test.skip=true'
+            }
+        }
     }
 }
