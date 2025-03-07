@@ -1,6 +1,6 @@
 pipeline {
     agent any
-   tools {
+    tools {
         jdk 'JAVA_HOME'
         maven 'M2_HOME'
     }
@@ -10,32 +10,24 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/hsinemt/HssineMtiraouiDevOps.git'
             }
         }
-        stage('Compile Stage') {
+        stage('Compile & Package') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean package -Dmaven.test.skip=true' // Builds the JAR
             }
         }
-stage('build Image ') {
-    steps {
-        sh 'docker build -t hsinemt/timesheet-devops:1.0.0 -f Dockerfile .'
-    }
-}
-stage('deploy Image ') {
-    steps {
-        sh 'sudo docker push hsinemt/timesheet-devops:1.0.0 .'
-    }
-}
-        // stage('MVN SONARQUBE') {
-        //     steps {
-        //         script {
-        //             // Use the provided SonarQube token
-        //             sh 'mvn sonar:sonar -Dsonar.token=squ_4d0ae395d64be775fc49cef3b0d43bc25f3a786a -Dmaven.skipTests=true'
-        //         }
-        //     }
-        // }
-stage('MVN Nexus') {
+        stage('Build Docker Image') {
             steps {
-                sh 'mvn install -Dmaven.test.skip=true'
+                sh 'docker build -t hsinemt/timesheet-devops:1.0.0 .'
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push hsinemt/timesheet-devops:1.0.0' // Removed trailing dot
+            }
+        }
+        stage('Deploy to Nexus') {
+            steps {
+                sh 'mvn deploy -Dmaven.test.skip=true' // Deploy to Nexus
             }
         }
     }
