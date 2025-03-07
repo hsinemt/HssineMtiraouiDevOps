@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+   tools {
+        jdk 'JAVA_HOME'
+        maven 'M2_HOME'
+    }
+
     stages {
         stage('GIT') {
             steps {
@@ -13,6 +18,16 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+        stage('build Image ') {
+            steps {
+                sh 'docker build -t hsinemt/timesheet-devops:1.0.0 .'
+             }
+         }
+        stage('deploy Image ') {
+             steps {
+                sh 'docker push hsinemt/timesheet-devops:1.0.0 .'
+             }
+         }
 
         // stage('MVN SONARQUBE') {
         //     steps {
