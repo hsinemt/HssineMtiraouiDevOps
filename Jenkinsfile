@@ -16,15 +16,15 @@ pipeline {
             }
         }
         stage('build Image ') {
-            steps {
-                sh 'docker build -t hsinemt/timesheet-devops:1.0.0 .'
-             }
-         }
-        stage('deploy Image ') {
-             steps {
-                sh 'docker push hsinemt/timesheet-devops:1.0.0 .'
-             }
-         }
+    steps {
+        sh 'sudo docker build -t hsinemt/timesheet-devops:1.0.0 .'
+    }
+}
+stage('deploy Image ') {
+    steps {
+        sh 'sudo docker push hsinemt/timesheet-devops:1.0.0 .'
+    }
+}
         // stage('MVN SONARQUBE') {
         //     steps {
         //         script {
