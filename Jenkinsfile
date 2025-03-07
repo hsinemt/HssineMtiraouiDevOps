@@ -17,12 +17,12 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t hsinemt/timesheet-devops:1.0.0 .'
+                sh 'docker build -t hsinemt/timesheetproject:1.0.0 .'
             }
         }
         stage('Push Docker Image') {
             steps {
-                sh 'docker push hsinemt/timesheet-devops:1.0.0' // Removed trailing dot
+                sh 'docker push hsinemt/timesheetproject:1.0.0' // Removed trailing dot
             }
         }
         stage('Deploy to Nexus') {
