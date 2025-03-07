@@ -15,9 +15,9 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-        stage('build Image ') {
+stage('build Image ') {
     steps {
-        sh 'sudo docker build -t hsinemt/timesheet-devops:1.0.0 .'
+        sh 'docker build -t hsinemt/timesheet-devops:1.0.0 -f Dockerfile .'
     }
 }
 stage('deploy Image ') {
